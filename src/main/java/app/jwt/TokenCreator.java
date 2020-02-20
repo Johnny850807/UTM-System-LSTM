@@ -7,15 +7,14 @@ import java.util.Date;
 
 public class TokenCreator {
 
-    public static void create(){
+    public static void create(String pilotId){
         String token = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
 
                 .setIssuedAt(new Date()) // 簽發時間
                 .setExpiration(new Date(new Date().getTime() + 10000L))// 過期時間
-                .setSubject("shawnwuID")
-                .setIssuer("nutn")
-                .claim("user_id", "20191016001")
+                .setSubject("shawnwuID")//用戶名稱
+                .claim("user_id", "20191016001")//使用者資訊
 
                 //簽證
                 .signWith(SignatureAlgorithm.HS256, "DRONE".getBytes())

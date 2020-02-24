@@ -194,6 +194,9 @@ public class FeatureCollectionBuilder {
 
     public JSONObject buildJsonObject(){
         FeatureCollection featureCollection = FeatureCollection.fromFeatures(featureList);
+
+        System.out.println("is:"+featureCollection.toJson());
+
         JSONObject jsonObject = null;
         try {
             jsonObject = (JSONObject) new JSONParser().parse(featureCollection.toJson());

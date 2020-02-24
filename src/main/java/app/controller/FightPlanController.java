@@ -8,6 +8,7 @@ import app.model.flightplan.FlightPlanStatus;
 
 import app.model.form.FlightPlanForm;
 import app.service.FlightPlanService;
+import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -52,11 +53,13 @@ public class FightPlanController {
     }
 
     @GetMapping("/{pilotId}")
-    public ResponseEntity<?> findAllFlightPlan(@PathVariable String pilotId){
+    public ResponseEntity<?> findAllFlightPlanGeoJson(@PathVariable String pilotId){
         List<FlightPlan> flightPlanList = flightPlanService.findAllFlightPlan(pilotId);
         if(flightPlanList.isEmpty())
             throw new NotFoundException("Not Found FlightPlan");
-        return ResponseEntity.ok(flightPlanList);
+        JSONObject flightPlanGeoJson = flightPlanService.getFlightPlanGeoJson(flightPlanList);
+        System.out.println(flightPlanGeoJson.toJSONString());
+        return ResponseEntity.ok(flightPlanGeoJson);
     }
 
 }

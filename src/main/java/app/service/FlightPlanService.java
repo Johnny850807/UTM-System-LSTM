@@ -1,16 +1,25 @@
 package app.service;
 
+import app.geotools.FeatureCollectionBuilder;
+import app.geotools.GeoJsonTool;
+import app.geotools.Properties;
 import app.model.flightplan.FlightPlan;
+import app.model.flightplan.FlightPlanPath;
 import app.response.FlightPlanResponse;
 import app.model.form.FlightPlanForm;
 import app.repository.FlightPlanRepository;
 import app.utility.converter.DateTimeManager;
+import com.mapbox.geojson.Point;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static app.model.flightplan.FlightPlanStatus.*;
 
@@ -76,6 +85,27 @@ public class FlightPlanService {
     public List<FlightPlan> findAllFlightPlan(String pilotId){
         System.out.println("GET ALL PLAN");
         return flightPlanRepository.findAllByPilotId(pilotId);
+    }
+
+    public JSONObject getFlightPlanGeoJson(List<FlightPlan> flightPlanList){
+        FeatureCollectionBuilder pathFeatureCollection = GeoJsonTool.buildFeatureCollection();
+        flightPlanList.forEach(flightPlan -> {
+            FlightPlanPath flightPlanPath = flightPlan.getFlightPlanPath();
+            double[][] planPoint = flightPlanPath.getCoordinate();
+            List<Point> lineStringPoint = new ArrayList<>();
+            for (double[] point : planPoint) {
+                lineStringPoint.add(Point.fromLngLat(point[0], point[1]));
+            }
+
+            Map<String, String> pathProperties = new HashMap<>();
+            pathProperties.put("plan-id", String.valueOf(flightPlan.getPlanId()));
+            pathProperties.put("uav-id", flightPlan.getUavId());
+            pathProperties.put("expected-takeoff-time", flightPlan.getExpectedTakeoffTime());
+            pathProperties.put("fly-height", String.valueOf(flightPlan.getExpectedFlyingHeight()));
+            pathProperties.put("description", flightPlan.getFlightDescription());
+            pathFeatureCollection.addLineString(lineStringPoint, new Properties(pathProperties));
+        });
+        return pathFeatureCollection.buildJsonObject();
     }
 
     public void updateFlightPlan(){

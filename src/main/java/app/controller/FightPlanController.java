@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.gto.UavGeoJsonOnMapGTO;
 import app.handler.exception.InvalidRequestException;
 import app.handler.exception.NotFoundException;
 import app.model.flightplan.FlightPlan;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/flightplan")
+@RequestMapping("/flightPlan")
 public class FightPlanController {
 
     @Resource
@@ -57,8 +58,7 @@ public class FightPlanController {
         List<FlightPlan> flightPlanList = flightPlanService.findAllFlightPlan(pilotId);
         if(flightPlanList.isEmpty())
             throw new NotFoundException("Not Found FlightPlan");
-        JSONObject flightPlanGeoJson = flightPlanService.getFlightPlanGeoJson(flightPlanList);
-        System.out.println(flightPlanGeoJson.toJSONString());
+        UavGeoJsonOnMapGTO flightPlanGeoJson = flightPlanService.getFlightPlanGeoJson(flightPlanList);
         return ResponseEntity.ok(flightPlanGeoJson);
     }
 

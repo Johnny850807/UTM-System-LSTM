@@ -24,7 +24,6 @@ public class ApiExceptionHandler {
     @ExceptionHandler(value = InvalidRequestException.class)
     @ResponseBody
     public ResponseEntity<?> handleInvalidRequest(InvalidRequestException e){
-        System.out.println("13123123123123123123123123");
         FieldError fieldError = e.getErrors().get(0);
         String errorMessage = fieldError.getField()+" "+fieldError.getDefaultMessage();
         RequestErrorResponse errorResponse = new RequestErrorResponse(fieldError, errorMessage);

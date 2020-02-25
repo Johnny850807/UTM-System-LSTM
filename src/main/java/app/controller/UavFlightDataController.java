@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.gto.UavGeoJsonOnMapGTO;
 import app.model.uav.UavFlightPath;
 import app.service.UavDataService;
 
@@ -11,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/uav/flight_data")
+@RequestMapping("/uav/flightData")
 public class UavFlightDataController {
 
     @Resource
@@ -24,8 +25,8 @@ public class UavFlightDataController {
 
     @CrossOrigin
     @GetMapping(value = "/location/{pilotId}")
-    public List<JSONObject> getUavLatLongData(@PathVariable String pilotId){
-        List<JSONObject> geoJson = uavDataService.getUavPathDataByPilot(pilotId);
+    public List<UavGeoJsonOnMapGTO> getUavLatLongData(@PathVariable String pilotId){
+        List<UavGeoJsonOnMapGTO> geoJson = uavDataService.getUavPathDataByPilot(pilotId);
         System.out.println(geoJson);
         return geoJson;
     }
@@ -37,19 +38,19 @@ public class UavFlightDataController {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/limit_area/forbid")
+    @GetMapping(value = "/limitArea/forbid")
     public JSONObject getLimitAreaData(){
         return uavDataService.getForbidAreaJson();
     }
 
     @CrossOrigin
-    @GetMapping(value = "/limit_area/allow_fly")
+    @GetMapping(value = "/limitArea/allowFly")
     public JSONObject getAllowsFlyAreaData(){
         return uavDataService.getAllowsFlyAreaJson();
     }
 
     @CrossOrigin
-    @GetMapping(value = "/limit_area/airport_camp")
+    @GetMapping(value = "/limitArea/airportCamp")
     public JSONObject getAirportCampLimitAreaData(){
         return uavDataService.getAirportCampLimitAreaJson();
     }

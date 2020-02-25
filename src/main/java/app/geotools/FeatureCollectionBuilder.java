@@ -1,5 +1,6 @@
 package app.geotools;
 
+import app.gto.UavGeoJsonOnMapGTO;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -192,18 +193,9 @@ public class FeatureCollectionBuilder {
         return featureCollection.toJson();
     }
 
-    public JSONObject buildJsonObject(){
+    public UavGeoJsonOnMapGTO buildJsonObject(){
         FeatureCollection featureCollection = FeatureCollection.fromFeatures(featureList);
-
-        System.out.println("is:"+featureCollection.toJson());
-
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = (JSONObject) new JSONParser().parse(featureCollection.toJson());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return jsonObject;
+        return new Gson().fromJson(featureCollection.toJson(), UavGeoJsonOnMapGTO.class);
     }
 
     private void addToFeatureCollection(CoordinateContainer coordinateContainer){

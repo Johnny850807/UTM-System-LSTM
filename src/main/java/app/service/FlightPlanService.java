@@ -3,6 +3,7 @@ package app.service;
 import app.geotools.FeatureCollectionBuilder;
 import app.geotools.GeoJsonTool;
 import app.geotools.Properties;
+import app.gto.UavGeoJsonOnMapGTO;
 import app.model.flightplan.FlightPlan;
 import app.model.flightplan.FlightPlanPath;
 import app.response.FlightPlanResponse;
@@ -87,7 +88,7 @@ public class FlightPlanService {
         return flightPlanRepository.findAllByPilotId(pilotId);
     }
 
-    public JSONObject getFlightPlanGeoJson(List<FlightPlan> flightPlanList){
+    public UavGeoJsonOnMapGTO getFlightPlanGeoJson(List<FlightPlan> flightPlanList){
         FeatureCollectionBuilder pathFeatureCollection = GeoJsonTool.buildFeatureCollection();
         flightPlanList.forEach(flightPlan -> {
             FlightPlanPath flightPlanPath = flightPlan.getFlightPlanPath();

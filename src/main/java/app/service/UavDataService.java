@@ -2,6 +2,7 @@ package app.service;
 
 import app.geotools.FeatureCollectionBuilder;
 import app.geotools.GeoJsonTool;
+import app.gto.UavGeoJsonOnMapGTO;
 import app.model.uav.UavFlightPath;
 import app.repository.UavFlightPathRepository;
 import com.mapbox.geojson.Point;
@@ -52,7 +53,7 @@ public class UavDataService {
     }
 
 
-    public List<JSONObject> getUavPathDataByPilot(String pilotId) {
+    public List<UavGeoJsonOnMapGTO> getUavPathDataByPilot(String pilotId) {
         List<UavFlightPath> uavFlightPaths = uavFlightPathRepository.findAllByPilotId(pilotId);
         List<List<UavFlightPath>> clusterUavFlightPath = clusterUavFlightPathByPilotId(uavFlightPaths, pilotId);
 
@@ -71,8 +72,8 @@ public class UavDataService {
         }
         headIconFeatureCollection.addMultiPoints(headIconList);
 
-        JSONObject headIconJsonString = headIconFeatureCollection.buildJsonObject();
-        JSONObject pathJsonString = pathFeatureCollection.buildJsonObject();
+        UavGeoJsonOnMapGTO headIconJsonString = headIconFeatureCollection.buildJsonObject();
+        UavGeoJsonOnMapGTO pathJsonString = pathFeatureCollection.buildJsonObject();
         return Arrays.asList(pathJsonString, headIconJsonString);
     }
 

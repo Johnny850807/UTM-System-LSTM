@@ -1,6 +1,8 @@
 package app.response;
 
-import org.springframework.validation.FieldError;
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
 
 public class ErrorResponse {
 

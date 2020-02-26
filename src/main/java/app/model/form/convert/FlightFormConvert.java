@@ -5,6 +5,10 @@ import app.model.form.FlightPlanForm;
 import app.model.form.FormConvert;
 import org.springframework.beans.BeanUtils;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class FlightFormConvert implements FormConvert<FlightPlanForm, FlightPlan> {
 
     @Override

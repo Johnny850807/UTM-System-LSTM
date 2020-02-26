@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class FeatureCollectionBuilder {
 
     private List<Feature> featureList = new ArrayList<>();

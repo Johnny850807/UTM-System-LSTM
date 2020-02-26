@@ -1,5 +1,9 @@
 package app.model.flightplan;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public interface FlightPlanStatus {
 
     String OK_MESSAGE = "OK";

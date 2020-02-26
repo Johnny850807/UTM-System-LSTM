@@ -1,6 +1,10 @@
-package app.utility.converter;
+package app.utility;
 
 import java.time.LocalDateTime;
+
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
 
 public class DateTimeManager {
 

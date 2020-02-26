@@ -3,6 +3,10 @@ package app.geotools;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class Properties {
 
     Map<String, String> properties;

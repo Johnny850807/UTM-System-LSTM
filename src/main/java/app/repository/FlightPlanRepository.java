@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Repository
 public interface FlightPlanRepository extends JpaRepository<FlightPlan, Long> {
 

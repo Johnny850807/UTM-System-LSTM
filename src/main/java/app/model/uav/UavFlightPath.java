@@ -3,6 +3,10 @@ package app.model.uav;
 
 import javax.persistence.*;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Entity(name = "uav_flight_path")
 public class UavFlightPath {
 

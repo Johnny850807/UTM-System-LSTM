@@ -9,7 +9,7 @@ import app.model.flightplan.FlightPlanPath;
 import app.response.FlightPlanResponse;
 import app.model.form.FlightPlanForm;
 import app.repository.FlightPlanRepository;
-import app.utility.converter.DateTimeManager;
+import app.utility.DateTimeManager;
 import com.mapbox.geojson.Point;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,10 @@ import java.util.Map;
 
 import static app.model.flightplan.FlightPlanStatus.*;
 
+
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
 
 @Service
 public class FlightPlanService {

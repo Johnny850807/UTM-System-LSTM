@@ -5,6 +5,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import static app.model.form.FormStatus.MAY_NOT_BE_EMPTY;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class PilotForm {
 
     @JsonProperty("pilot-id")

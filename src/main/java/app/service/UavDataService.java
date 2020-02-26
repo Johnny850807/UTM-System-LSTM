@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Service
 public class UavDataService {
 

@@ -6,6 +6,10 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class RequestErrorResponse {
 
     private List<ErrorField> errors;

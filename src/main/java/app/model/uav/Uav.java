@@ -6,6 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Entity(name = "uav_info")
 public class Uav {
 

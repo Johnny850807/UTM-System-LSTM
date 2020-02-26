@@ -1,5 +1,9 @@
 package app.handler;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class ErrorField {
 
     String field;

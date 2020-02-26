@@ -4,6 +4,10 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class InvalidRequestException extends RuntimeException {
 
     private List<FieldError>  fieldErrors;

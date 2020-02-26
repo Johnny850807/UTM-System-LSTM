@@ -5,6 +5,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class JwtUtil {
 
     public static void create(String pilotId){

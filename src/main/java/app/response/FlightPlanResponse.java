@@ -1,5 +1,9 @@
 package app.response;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class FlightPlanResponse {
 
     private int statusCode;

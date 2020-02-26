@@ -2,6 +2,10 @@ package app.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class LoginResponse {
 
     private String token;

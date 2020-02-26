@@ -2,6 +2,10 @@ package app.geotools;
 
 import com.mapbox.geojson.exception.GeoJsonException;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class PolygonFormatException extends GeoJsonException {
 
     public PolygonFormatException() {

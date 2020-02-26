@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @CrossOrigin
 @RestController
 @RequestMapping("/uav")

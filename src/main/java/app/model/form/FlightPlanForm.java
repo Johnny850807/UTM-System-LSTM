@@ -14,6 +14,10 @@ import static app.model.form.FormStatus.MAY_NOT_BE_NULL;
 import static app.model.form.FormStatus.MUST_GREATER_THAN_60;
 
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 public class FlightPlanForm {
 
     @NotBlank(message = MAY_NOT_BE_EMPTY)

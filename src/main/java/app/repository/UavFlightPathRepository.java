@@ -8,6 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Repository
 public interface UavFlightPathRepository extends JpaRepository<UavFlightPath, Long> {
 

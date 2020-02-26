@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "features",

@@ -1,8 +1,12 @@
 package app.model.flightplan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
+
+/**
+ * @author swshawnwu@gmail.com(ShawnWu)
+ */
+
 @Entity(name = "flight_plan")
 @Table(name = "flight_plan")
 public class FlightPlan {

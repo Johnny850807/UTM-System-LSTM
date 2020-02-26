@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hang-TW">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+
+    <title>Drone</title>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+        <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='//d3js.org/d3.v3.min.js' charset='utf-8'></script>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/src/js/cookie-handler.js"></script>
+    <script src="/src/js/system-config.js"></script>
+    <link rel="stylesheet"  href="/src/css/header-side-bar.css">
+    <link rel="stylesheet"  href="/src/css/main-map.css">
+
+</head>
+<body>
+
+
+
+<div id="wrapper">
+     
+    <script src="/src/js/header-side-bar.js"></script>
+    <div id='map'>
+        <div id="header-bar" >
+            <div id="burger" class="burger" onclick="openNav()">
+                <div id="line1" class="line1"></div>
+                <div id="line2" class="line2"></div>
+                <div id="line3" class="line3"></div>
+            </div>
+
+            <div id="side-bar" class="sidenav">
+                <div id="photo-part">
+                    <img id="pilot-photo" src="/src/image/man.png">
+                    <p id="pilot-id">SHAWN WU</p>
+                </div>
+
+                <div class="divider-line"></div>
+                <a><i class="fas fa-map-marked"></i>MAP</a>
+                <a onclick="goRigisterPlan()"> <i class="fas fa-file-contract"></i>FLIGHT PLAN</a>
+                <a><i class="fas fa-bell"></i>Notification</a>
+            </div>
+            
+            <!-- <div class="tool-bar-vertical-center">
+                <div class="search-box-wrapper ">
+                    <input id="search-input" type="text" placeholder="Search..." class="search-box-input">
+                    <button class="search-box-button" onclick="searchPosition()"><i class="fas fa-search"></i></button>
+                </div>
+            </div> -->
+
+        </div> 
+</div>
+
+    
+    <script src="/src/js/main-map.js"></script>
+</div>
+
+</body>
+</html>

@@ -2,24 +2,32 @@ package app.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 /**
  * @author swshawnwu@gmail.com(ShawnWu)
  */
-
 public class JwtUtil {
 
-    public static void create(String pilotId){
-        String token = Jwts.builder()
+    static final long expirationTime = 432_000_000;
+    public static String createJWS(String pilotId){
+        ResourceBundle resource = ResourceBundle.getBundle("secret");
+        String secret = resource.getString("jwt.secret");
+        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+        return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .setIssuedAt(new Date()) // 簽發時間
-                .setExpiration(new Date(new Date().getTime() + 10000L))// 過期時間
-                .setSubject(pilotId)//用戶名稱
-                .signWith(SignatureAlgorithm.HS256, "DRONE".getBytes())
+                .claim("pilotId",pilotId)
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))// 過期時間
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
+    }
 
-        System.out.println(new Date(new Date().getTime() + 10000L));
+    public boolean authenticateJws(){
+        return true;
     }
 }

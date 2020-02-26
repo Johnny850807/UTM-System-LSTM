@@ -2,17 +2,18 @@ package app.service;
 
 import app.geotools.FeatureCollectionBuilder;
 import app.geotools.GeoJsonTool;
-import app.gto.UavGeoJsonOnMapGTO;
+import app.dto.FeatureCollectionDTO;
 import app.model.uav.UavFlightPath;
 import app.repository.UavFlightPathRepository;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.mapbox.geojson.Point;
 
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -21,30 +22,31 @@ import java.util.stream.Collectors;
 @Service
 public class UavDataService {
 
-    @Resource
+    @Autowired
     UavFlightPathRepository uavFlightPathRepository;
 
-    public JSONObject getForbidAreaJson(){
-        return readJsonFile("src/main/java/app/static/forbid_area.json");
+    public FeatureCollectionDTO getForbidAreaJson(){
+        return getResourceFile("static/forbid_area.json");
     }
 
-    public JSONObject getAllowsFlyAreaJson(){
-        return readJsonFile("src/main/java/app/static/allows_fly_area.json");
+    public FeatureCollectionDTO getAllowsFlyAreaJson(){
+        return getResourceFile("static/allows_fly_area.json");
     }
 
-    public JSONObject getAirportCampLimitAreaJson(){
-        return readJsonFile("src/main/java/app/static/airport_camp_limit.json");
+    public FeatureCollectionDTO getAirportCampLimitAreaJson(){
+        return getResourceFile("static/airport_camp_limit.json");
     }
 
-    private JSONObject readJsonFile(String path){
-        JSONObject jsonObject = null;
+    private FeatureCollectionDTO getResourceFile(String path){
+        FeatureCollectionDTO featureCollectionDTO = null;
+        Resource resource = new ClassPathResource(path);
         try {
-            JSONParser parser = new JSONParser();
-            jsonObject = (JSONObject)parser.parse(new FileReader(path));
-        } catch (IOException | ParseException e) {
+            JsonReader jsonReader = new JsonReader(new FileReader(resource.getFile()));
+            featureCollectionDTO = new Gson().fromJson(jsonReader, FeatureCollectionDTO.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return jsonObject;
+        return featureCollectionDTO;
     }
 
 
@@ -53,7 +55,7 @@ public class UavDataService {
     }
 
 
-    public List<UavGeoJsonOnMapGTO> getUavPathDataByPilot(String pilotId) {
+    public List<FeatureCollectionDTO> getUavPathDataByPilot(String pilotId) {
         List<UavFlightPath> uavFlightPaths = uavFlightPathRepository.findAllByPilotId(pilotId);
         List<List<UavFlightPath>> clusterUavFlightPath = clusterUavFlightPathByPilotId(uavFlightPaths, pilotId);
 
@@ -72,8 +74,8 @@ public class UavDataService {
         }
         headIconFeatureCollection.addMultiPoints(headIconList);
 
-        UavGeoJsonOnMapGTO headIconJsonString = headIconFeatureCollection.buildJsonObject();
-        UavGeoJsonOnMapGTO pathJsonString = pathFeatureCollection.buildJsonObject();
+        FeatureCollectionDTO headIconJsonString = headIconFeatureCollection.buildJsonObject();
+        FeatureCollectionDTO pathJsonString = pathFeatureCollection.buildJsonObject();
         return Arrays.asList(pathJsonString, headIconJsonString);
     }
 

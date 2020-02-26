@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
@@ -24,9 +27,14 @@ public class ApiExceptionHandler {
     @ExceptionHandler(value = InvalidRequestException.class)
     @ResponseBody
     public ResponseEntity<?> handleInvalidRequest(InvalidRequestException e){
-        FieldError fieldError = e.getErrors().get(0);
-        String errorMessage = fieldError.getField()+" "+fieldError.getDefaultMessage();
-        RequestErrorResponse errorResponse = new RequestErrorResponse(fieldError, errorMessage);
+        List<ErrorField> errorFields = new ArrayList<>();
+        List<FieldError> fieldErrors = e.getErrors();
+        fieldErrors.forEach(fieldError -> {
+            errorFields.add(new ErrorField(fieldError.getField(), fieldError.getDefaultMessage()));
+        });
+        RequestErrorResponse errorResponse = new RequestErrorResponse(errorFields, "Invalid Request");
         return ResponseEntity.badRequest().body(errorResponse);
     }
+
+
 }

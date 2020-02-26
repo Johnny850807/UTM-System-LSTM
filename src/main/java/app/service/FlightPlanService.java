@@ -3,7 +3,7 @@ package app.service;
 import app.geotools.FeatureCollectionBuilder;
 import app.geotools.GeoJsonTool;
 import app.geotools.Properties;
-import app.gto.UavGeoJsonOnMapGTO;
+import app.dto.FeatureCollectionDTO;
 import app.model.flightplan.FlightPlan;
 import app.model.flightplan.FlightPlanPath;
 import app.response.FlightPlanResponse;
@@ -11,7 +11,6 @@ import app.model.form.FlightPlanForm;
 import app.repository.FlightPlanRepository;
 import app.utility.converter.DateTimeManager;
 import com.mapbox.geojson.Point;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -88,7 +87,7 @@ public class FlightPlanService {
         return flightPlanRepository.findAllByPilotId(pilotId);
     }
 
-    public UavGeoJsonOnMapGTO getFlightPlanGeoJson(List<FlightPlan> flightPlanList){
+    public FeatureCollectionDTO getFlightPlanGeoJson(List<FlightPlan> flightPlanList){
         FeatureCollectionBuilder pathFeatureCollection = GeoJsonTool.buildFeatureCollection();
         flightPlanList.forEach(flightPlan -> {
             FlightPlanPath flightPlanPath = flightPlan.getFlightPlanPath();

@@ -1,6 +1,6 @@
-package app.gto;
+package app.dto;
 
-import app.gto.geojson.Feature;
+import app.dto.geojson.Feature;
 import com.fasterxml.jackson.annotation.*;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.Map;
         "features",
         "type"
 })
-public class UavGeoJsonOnMapGTO {
+public class FeatureCollectionDTO {
 
     @JsonProperty("features")
     private List<Feature> features = null;

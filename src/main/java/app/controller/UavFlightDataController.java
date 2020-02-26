@@ -1,10 +1,9 @@
 package app.controller;
 
-import app.gto.UavGeoJsonOnMapGTO;
+import app.dto.FeatureCollectionDTO;
 import app.model.uav.UavFlightPath;
 import app.service.UavDataService;
 
-import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +24,8 @@ public class UavFlightDataController {
 
     @CrossOrigin
     @GetMapping(value = "/location/{pilotId}")
-    public List<UavGeoJsonOnMapGTO> getUavLatLongData(@PathVariable String pilotId){
-        List<UavGeoJsonOnMapGTO> geoJson = uavDataService.getUavPathDataByPilot(pilotId);
+    public List<FeatureCollectionDTO> getUavLatLongData(@PathVariable String pilotId){
+        List<FeatureCollectionDTO> geoJson = uavDataService.getUavPathDataByPilot(pilotId);
         System.out.println(geoJson);
         return geoJson;
     }
@@ -39,19 +38,19 @@ public class UavFlightDataController {
 
     @CrossOrigin
     @GetMapping(value = "/limitArea/forbid")
-    public JSONObject getLimitAreaData(){
+    public FeatureCollectionDTO getLimitAreaData(){
         return uavDataService.getForbidAreaJson();
     }
 
     @CrossOrigin
     @GetMapping(value = "/limitArea/allowFly")
-    public JSONObject getAllowsFlyAreaData(){
+    public FeatureCollectionDTO getAllowsFlyAreaData(){
         return uavDataService.getAllowsFlyAreaJson();
     }
 
     @CrossOrigin
     @GetMapping(value = "/limitArea/airportCamp")
-    public JSONObject getAirportCampLimitAreaData(){
+    public FeatureCollectionDTO getAirportCampLimitAreaData(){
         return uavDataService.getAirportCampLimitAreaJson();
     }
 

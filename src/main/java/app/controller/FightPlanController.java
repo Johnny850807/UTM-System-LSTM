@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.gto.UavGeoJsonOnMapGTO;
+import app.dto.FeatureCollectionDTO;
 import app.handler.exception.InvalidRequestException;
 import app.handler.exception.NotFoundException;
 import app.model.flightplan.FlightPlan;
@@ -9,7 +9,6 @@ import app.model.flightplan.FlightPlanStatus;
 
 import app.model.form.FlightPlanForm;
 import app.service.FlightPlanService;
-import org.json.simple.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +57,7 @@ public class FightPlanController {
         List<FlightPlan> flightPlanList = flightPlanService.findAllFlightPlan(pilotId);
         if(flightPlanList.isEmpty())
             throw new NotFoundException("Not Found FlightPlan");
-        UavGeoJsonOnMapGTO flightPlanGeoJson = flightPlanService.getFlightPlanGeoJson(flightPlanList);
+        FeatureCollectionDTO flightPlanGeoJson = flightPlanService.getFlightPlanGeoJson(flightPlanList);
         return ResponseEntity.ok(flightPlanGeoJson);
     }
 

@@ -7,6 +7,7 @@ import com.mapbox.geojson.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author swshawnwu@gmail.com(ShawnWu)
@@ -204,10 +205,7 @@ public class FeatureCollectionBuilder {
 
     private void addToFeatureCollection(CoordinateContainer coordinateContainer, Properties properties){
         feature = Feature.fromGeometry(coordinateContainer);
-        Map<String, String> map = properties.getProperties();
-        for (String key : map.keySet()) {
-            feature.addStringProperty(key, map.get(key));
-        }
+        properties.forEach((k, v)-> feature.addStringProperty(String.valueOf(k), String.valueOf(v)));
         featureList.add(feature);
     }
 

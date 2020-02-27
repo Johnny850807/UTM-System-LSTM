@@ -2,7 +2,6 @@ package app.service;
 
 import app.geotools.FeatureCollectionBuilder;
 import app.geotools.GeoJsonTool;
-import app.geotools.Properties;
 import app.dto.FeatureCollectionDTO;
 import app.model.flightplan.FlightPlan;
 import app.model.flightplan.FlightPlanPath;
@@ -16,10 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static app.model.flightplan.FlightPlanStatus.*;
 
@@ -101,13 +97,13 @@ public class FlightPlanService {
                 lineStringPoint.add(Point.fromLngLat(point[0], point[1]));
             }
 
-            Map<String, String> pathProperties = new HashMap<>();
-            pathProperties.put("plan-id", String.valueOf(flightPlan.getPlanId()));
-            pathProperties.put("uav-id", flightPlan.getUavId());
-            pathProperties.put("expected-takeoff-time", flightPlan.getExpectedTakeoffTime());
-            pathProperties.put("fly-height", String.valueOf(flightPlan.getExpectedFlyingHeight()));
-            pathProperties.put("description", flightPlan.getFlightDescription());
-            pathFeatureCollection.addLineString(lineStringPoint, new Properties(pathProperties));
+            Properties properties = new Properties();
+            properties.put("plan-id", String.valueOf(flightPlan.getPlanId()));
+            properties.put("uav-id", flightPlan.getUavId());
+            properties.put("expected-takeoff-time", flightPlan.getExpectedTakeoffTime());
+            properties.put("fly-height", String.valueOf(flightPlan.getExpectedFlyingHeight()));
+            properties.put("description", flightPlan.getFlightDescription());
+            pathFeatureCollection.addLineString(lineStringPoint, properties);
         });
         return pathFeatureCollection.buildJsonObject();
     }

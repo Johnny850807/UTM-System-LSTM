@@ -10,6 +10,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * @author johnny850807@gmail.com (Waterball))
@@ -27,11 +29,12 @@ public class JpaConfig {
     @Bean
     @Profile("prod")
     public DataSource mysql() {
+        ResourceBundle properties = ResourceBundle.getBundle("datasource");
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://127.0.0.1:3306/utm?useUnicode=true&characterEncoding=utf-8&serverTimezone=CST")
-                .username("root")
-                .password("shawn4mysql")
+                .driverClassName(properties.getString("driver-class"))
+                .url(properties.getString("url"))
+                .username(properties.getString("username"))
+                .password(properties.getString("password"))
                 .build();
     }
 }

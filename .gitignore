@@ -6,3 +6,4 @@ target/
 *.ipr
 
 secret.properties
+datasource.properties
